@@ -159,3 +159,11 @@ Fetch existing vpc
 ![alt text](images/image-5.png)
 ![alt text](images/image-6.png)
 ![alt text](images/image-2.png)
+
+
+
+### Created s3 bucket.
+
+![alt text](images/s3bucket.tf.png)
+![alt text](images/s3version.png)
+![alt text](images/s3output.png)
