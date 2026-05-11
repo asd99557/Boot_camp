@@ -11,8 +11,9 @@ resource "aws_eks_node_group" "private_nodes" {
   node_role_arn = aws_iam_role.eks_nodegroup_role.arn
 
   # Subnets where the worker nodes will be launched (typically private subnets)
-  #subnet_ids = [data.terraform_remote_state.vpc.outputs.aws_subnet_private_id]
-  subnet_ids = [data.terraform_remote_state.vpc.outputs.aws_subnet_Publicayush_id]
+  #subnet_ids = [data.terraform_remote_state.vpc.outputs.aws_subnet
+  subnet_ids = [data.terraform_remote_state.vpc.outputs.aws_subnet_public_id, data.terraform_remote_state.vpc.outputs.aws_subnet_Publicayush_id]
+
 
 
   # Instance types for the nodes (e.g., t3.medium, m5.large)
@@ -32,7 +33,7 @@ resource "aws_eks_node_group" "private_nodes" {
   # Configure auto-scaling limits and defaults
   scaling_config {
     # Desired number of nodes when the node group is created
-    desired_size = 3
+    desired_size = 1
 
     # Minimum number of nodes allowed
     min_size = 1

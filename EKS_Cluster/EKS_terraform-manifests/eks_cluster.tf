@@ -17,7 +17,9 @@ resource "aws_eks_cluster" "main" {
     # Subnets where EKS control plane ENIs will be placed (should be private)
     #subnet_ids = data.terraform_remote_state.vpc.outputs.aws_subnet_private_id 
     #subnet_ids = [data.terraform_remote_state.vpc.outputs.aws_subnet_private_id]
-    subnet_ids = [data.terraform_remote_state.vpc.outputs.aws_subnet_Publicayush_id]
+    subnet_ids = [data.terraform_remote_state.vpc.outputs.aws_subnet_public_id, data.terraform_remote_state.vpc.outputs.aws_subnet_Publicayush_id]  
+
+  
 
     # Allow access to private endpoint (inside VPC)
     endpoint_private_access = var.cluster_endpoint_private_access
