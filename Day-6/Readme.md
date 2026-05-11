@@ -84,6 +84,7 @@ kubectl apply -f 01_catalog_pod.yaml
 - HPA: Horizontal Pod Scaling using Cpu memory matrics scaling.
 - Rolling update: Rolling Update is a deployment strategy where old Pods are replaced with new Pods gradually, not all at once.
 - Self-healing, and Roll Back means reverting an application deployment to a previous working version if a new release causes issues.
+- 
 
 ```
 apiVersion: apps/v1
