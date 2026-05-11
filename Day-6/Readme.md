@@ -51,6 +51,11 @@ spec:
           path: /health
           port: 8080
 ```
+
+created Pod
+![alt text](Picture11.png)
+
+
 - Readiness Probe is used to check whether a container is ready to receive traffic.
 
 If the readiness probe fails, the Pod keeps running, but Kubernetes removes it from Service endpoints so it does not receive requests.
