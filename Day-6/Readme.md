@@ -62,8 +62,13 @@ If the readiness probe fails, the Pod keeps running, but Kubernetes removes it f
 ```
 kubectl apply -f 01_catalog_pod.yaml
 ```
+![alt text](images/Picture12.png)
+
 - Kubectl descirbe pod 
 - kubectl logs -f catalog-pod
+
+![alt text](images/Picture13.png)
+
 - Expose the Pod locally using:
 - kubectl port-forward pod/catalog-pod 7080:8080
 - kubectl exec -it catalog-pod -- sh
@@ -140,7 +145,15 @@ kubectl apply -f 01_catalog_deployment.yaml
 kubectl scale deployment catalog --replicas=3
 ```
 
+![alt text](images/Picture15.png)
+
 Deployment > ReplicaSet > Pod
+
+
+
+![alt text](images/Picture13.png)
+
+
 
 
 ## Rollback to Previous Version (1.0.0)
@@ -149,6 +162,10 @@ kubectl rollout undo deployment/catalog
 ```
 
 - Check the version after rollback:
+
+![alt text](images/Picture16.png)
+
+
 
 ``` 
 kubectl describe deployment catalog | grep Image
@@ -188,6 +205,10 @@ kubectl apply -f 02_catalog_clusterip_service.yaml
 kubectl get svc
 kubectl describe svc catalog-service
 ```
+![alt text](images/Picture17.png)
+
+
+
 ## Config Map
 - ConfigMap = Store non-sensitive config outside container image such as environment variables, command arguments, and configuration files.
 
