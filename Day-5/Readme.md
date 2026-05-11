@@ -83,3 +83,11 @@ kubectl get pods -n kube-system
 - Terraform Plan
 
 ![alt text](images/Picture8.png)
+![alt text](<created cluster.png>)
+
+
+## Connect to cluster 
+```
+aws eks update-kubeconfig --region <region> --name <cluster-name>
+```
+![alt text](Picture10.png)
