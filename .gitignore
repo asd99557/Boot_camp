@@ -4,7 +4,7 @@
 *.tfvars
 *.tfvars.json
 *.tfplan
-*.remote-state.tf
+*.remote-state.tf*
 crash.log
  
 # Plan/output/generated files
