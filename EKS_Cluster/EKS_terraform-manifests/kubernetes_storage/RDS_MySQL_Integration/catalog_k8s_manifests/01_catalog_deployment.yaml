@@ -27,25 +27,14 @@ spec:
         app.kubernetes.io/component: service
         app.kubernetes.io/owner: retail-store-sample    
     spec:
-      serviceAccountName: catalog-mysql-sa
+      serviceAccount: catalog-mysql-sa # Service Account
       securityContext:
         fsGroup: 1000
       containers:
         - name: catalog
           envFrom:
             - configMapRef:
-                name: catalog
-          env:
-            - name: RETAIL_CATALOG_PERSISTENCE_DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: catalog-db-credentials
-                  key: MYSQL_USER
-            - name: RETAIL_CATALOG_PERSISTENCE_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: catalog-db-credentials
-                  key: MYSQL_PASSWORD        
+                name: catalog                
           securityContext:
             capabilities:
               drop:
@@ -74,18 +63,22 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
+
           volumeMounts:
             - name: aws-secrets
               mountPath: /mnt/secrets-store
               readOnly: true
-            - name: tmp
-              mountPath: /tmp
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              export RETAIL_CATALOG_PERSISTENCE_USER=$(cat /mnt/secrets-store/MYSQL_USER);
+              export RETAIL_CATALOG_PERSISTENCE_PASSWORD=$(cat /mnt/secrets-store/MYSQL_PASSWORD);
+              echo "Starting Catalog service with secure DB credentials";
+              exec /app/main
       volumes:
         - name: aws-secrets
           csi:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: catalog-db-secrets
-        - name: tmp
-          emptyDir: {}
+              secretProviderClass: "catalog-db-secrets"
